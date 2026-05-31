@@ -4,3 +4,6 @@ class TicketCreate(BaseModel):
     name: str
     email: EmailStr
     issue: str
+
+class TicketStatusUpdate(BaseModel):
+    status: str
