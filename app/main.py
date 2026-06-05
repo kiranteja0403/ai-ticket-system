@@ -148,5 +148,13 @@ def delete_ticket_form(ticket_id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return RedirectResponse(url="/dashboard", status_code=303)
+@app.get("/history", response_class=HTMLResponse)
+def history_page(request: Request, db: Session = Depends(get_db)):
+    tickets = db.query(models.Ticket).order_by(models.Ticket.created_at.desc()).all()
+    return templates.TemplateResponse(
+        request=request,
+        name="history.html",
+        context={"tickets": tickets}
+    )
 
 
