@@ -68,9 +68,26 @@
         }
     </style>
 </head>
+
 <body>
     <h1>AI Ticket Dashboard</h1>
     <p><a href="/history">View Ticket History</a></p>
+    <p>
+        <a href="/dashboard">All</a> |
+        <a href="/dashboard/status/Open">Open</a> |
+        <a href="/dashboard/status/In Progress">In Progress</a> |
+        <a href="/dashboard/status/Closed">Closed</a>
+    </p>
+    <form action="/dashboard/search" method="get" style="margin: 15px 0;">
+        <input type="text" name="query" placeholder="Search by name, email, or issue" required>
+        <button type="submit">Search</button>
+    </form>
+    <form action="/dashboard/search" method="get" style="margin: 15px 0;">
+        <input type="text" name="query" placeholder="Search by name, email, or issue" required>
+        <button type="submit">Search</button>
+        <a href="/dashboard" style="margin-left: 10px;">Reset</a>
+    </form>
+
 
 
     <h2>Create New Ticket</h2>

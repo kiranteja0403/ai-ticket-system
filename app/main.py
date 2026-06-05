@@ -156,5 +156,26 @@ def history_page(request: Request, db: Session = Depends(get_db)):
         name="history.html",
         context={"tickets": tickets}
     )
+@app.get("/dashboard/status/{status}", response_class=HTMLResponse)
+def dashboard_by_status(status: str, request: Request, db: Session = Depends(get_db)):
+    tickets = db.query(models.Ticket).filter(models.Ticket.status == status).all()
+    return templates.TemplateResponse(
+        request=request,
+        name="dashboard.html",
+        context={"tickets": tickets}
+    )
+@app.get("/dashboard/search", response_class=HTMLResponse)
+def search_tickets(query: str, request: Request, db: Session = Depends(get_db)):
+    tickets = db.query(models.Ticket).filter(
+        (models.Ticket.name.ilike(f"%{query}%")) |
+        (models.Ticket.email.ilike(f"%{query}%")) |
+        (models.Ticket.issue.ilike(f"%{query}%"))
+    ).all()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dashboard.html",
+        context={"tickets": tickets}
+    )
 
 
